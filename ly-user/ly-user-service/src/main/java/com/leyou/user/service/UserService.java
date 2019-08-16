@@ -64,11 +64,12 @@ public class UserService {
         Map<String, String> msg = new HashMap<>();
         //生成code
         String code= NumberUtils.generateCode(6);
+        System.out.println(code);
         msg.put("phone",phone);
         msg.put("code",code);
         amqpTemplate.convertAndSend("ly.sms.exchange","sms.verify.code",msg);
         stringRedisTemplate.opsForValue().set(key,code,5, TimeUnit.MINUTES);
-        System.out.println("保存到redis");
+        System.out.println("保存到redis"+code);
     }
 
     /**
@@ -108,9 +109,22 @@ public class UserService {
         if (user==null) {
             throw  new LyException(ExceptionEnum.INVALID_USERNAME_PASSWORD);
         }
+        System.out.println(user.getPassword());
+
         if (!StringUtils.equals(user.getPassword(), CodecUtils.md5Hex(password,user.getSalt()))) {
             throw  new LyException(ExceptionEnum.INVALID_USERNAME_PASSWORD);
         }
         return user;
     }
+
+        public String queryUser(String code){
+            //生成halt
+            String salt = CodecUtils.generateSalt();
+            System.out.println("演 "+salt);
+            //密码加密
+            String password = CodecUtils.md5Hex("1234", salt);
+           return password;
+
+ }
+
 }

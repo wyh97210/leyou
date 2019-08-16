@@ -21,4 +21,5 @@ public class CodecUtils {
     public static String generateSalt(){
         return StringUtils.replace(UUID.randomUUID().toString(),"-","");
     }
+
 }

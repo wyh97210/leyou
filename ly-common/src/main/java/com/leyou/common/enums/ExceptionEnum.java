@@ -22,7 +22,9 @@ public enum ExceptionEnum {
     INVALID_USERNAME_PASSWORD(400,"无效的用户名和密码"),
     INVALID_USER_DATA_TYPE(400,"用户类型无效"),
     INVALID_RIGISTER_CODE(400,"无效验证码"),
-    GOODS_UPDATE_ERROR(500,"更新商品失败");
+    CREATE_TOKEN_ERROR(500,"生成用户凭证失败"),
+    GOODS_UPDATE_ERROR(500,"更新商品失败"),
+    UN_AUTHORIZED(403,"未授权" );
 
     private int code;
     private String msg;

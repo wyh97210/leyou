@@ -24,7 +24,19 @@ public enum ExceptionEnum {
     INVALID_RIGISTER_CODE(400,"无效验证码"),
     CREATE_TOKEN_ERROR(500,"生成用户凭证失败"),
     GOODS_UPDATE_ERROR(500,"更新商品失败"),
-    UN_AUTHORIZED(403,"未授权" );
+    UN_AUTHORIZED(403,"未授权" ), CART_NOT_FOUND(404,"购物车为空" ),
+    CREATE_OEDER_ERROR(500, "创建订单失败"),
+    CREATE_OEDERDETAIL_ERROR(500, "创建订单详情失败" ),
+    STOCK_NOT_ENOUGH(500,"库存不足" ),
+    ORDER_NOT_FOUND(500,"订单不存在" ),
+    ORDERDETAILS_NOT_FOUND(500,"订单详情不存在" ),
+    ORDERSTATUS_NOT_FOUND(500, "订单状态不存在"),
+    WX_PAY_ORDER_FAIL(500,"下单失败"),
+    ORDER_STATUS_ERROR(400,"订单状态异常"),
+    INVALID_SIGN_ERROR(400,"无效的签名"),
+    INVALID_ORDER_PARAM(400,"订单参数异常"),
+    UPDATE_ORDER_STATUS_ERROR(500,"更新订单状态失败"),
+            ;
 
     private int code;
     private String msg;

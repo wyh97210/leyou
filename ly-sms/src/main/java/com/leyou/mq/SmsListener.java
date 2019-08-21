@@ -2,7 +2,7 @@ package com.leyou.mq;
 
 import com.leyou.common.utils.JsonUtils;
 import com.leyou.config.SmsProperties;
-import com.leyou.utils.SmsUtils;
+import com.leyou.order.config.SmsUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.amqp.core.ExchangeTypes;

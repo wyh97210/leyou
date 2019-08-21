@@ -2,6 +2,7 @@ package com.leyou.item.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.leyou.common.dto.CartDTO;
 import com.leyou.common.enums.ExceptionEnum;
 import com.leyou.common.exception.LyException;
 import com.leyou.common.page.PageResult;
@@ -223,5 +224,30 @@ public class GoodsService {
        spu.setSkus(querySkuBySpuId(id));
        spu.setSpuDetail(querySpuDetailBySpuId(id));
         return spu;
+    }
+
+    public List<Sku> querySkuByIds(List<Long> ids) {
+        List<Sku> skus = skuMapper.selectByIdList(ids);
+        if(CollectionUtils.isEmpty(skus)){
+            throw new LyException(ExceptionEnum.SKU_NOT_FOUND);
+        }
+        skus.forEach(sku ->{
+            Stock stock = stockMapper.selectByPrimaryKey(sku.getId());
+            sku.setStock(stock.getStock());
+        });
+        return skus;
+    }
+
+    @Transactional
+    public  void decreseStock(List<CartDTO> carts) {
+
+        for (CartDTO cart : carts) {
+            //乐观锁  直接减库存 在SQL内部判断
+         int count=   stockMapper.decreseStock(cart.getSkuId(),cart.getNum());
+         if(count!=1){
+             throw new LyException(ExceptionEnum.STOCK_NOT_ENOUGH);
+         }
+
+        }
     }
 }

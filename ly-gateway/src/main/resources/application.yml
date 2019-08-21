@@ -17,7 +17,9 @@ zuul:
     item-service: /item/**
     search-service: /search/**
     user-service: /user/**
+    cart-service: /cart/**
     auth-service: /auth/** # 授权中心微服务
+    order-service: /order/**
     upload-service:
       path: /upload/**
       serviceId: upload-service
